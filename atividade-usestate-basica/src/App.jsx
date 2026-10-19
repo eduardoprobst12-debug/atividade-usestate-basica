@@ -1,122 +1,90 @@
-import { useState } from 'react'
-import heroImg from './assets/hero.png'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import './App.css'
+import { useState } from "react";
 
-function App() {
-  const [count, setCount] = useState(0)
+export default function App() {
+
+  const [contador, setContador] = useState(0);
+
+
+  function aumentar() {
+    setContador((valorAnterior) => {
+      if (valorAnterior >= 10) return valorAnterior; 
+      return valorAnterior + 1;
+    });
+  }
+
+
+  function diminuir() {
+    setContador((valorAnterior) => valorAnterior - 1);
+  }
+
+
+  function resetar() {
+    setContador(0);
+  }
+
+
+  const [visivel, setVisivel] = useState(false);
+
+
+  const [nome, setNome] = useState("");
+  const [mostrarSaudacao, setMostrarSaudacao] = useState(true);
 
   return (
-    <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
+    <div style={{ padding: "20px", fontFamily: "sans-serif", maxWidth: "500px" }}>
+      <h1>Exercícios de React useState</h1>
+
+
+      <section style={{ marginBottom: "30px", borderBottom: "1px solid #ccc", pb: "10px" }}>
+        <h2>Missão 1 + Desafio Extra — Contador</h2>
+        <p>Valor atual: <strong>{contador}</strong></p>
+
+        {contador === 10 && (
+          <p style={{ color: "green", fontWeight: "bold" }}>🎉 Meta atingida (10)!</p>
+        )}
+
+        <div style={{ display: "flex", gap: "10px" }}>
+          <button onClick={aumentar}>Aumentar</button>
+          <button onClick={diminuir}>Voltar um</button>
+          <button onClick={resetar}>Zerar</button>
         </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.jsx</code> and save to test <code>HMR</code>
-          </p>
-        </div>
-        <button
-          type="button"
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
+      </section>
+
+
+      <section style={{ marginBottom: "30px", borderBottom: "1px solid #ccc", pb: "10px" }}>
+        <h2>Missão 2 — Mostrar e Esconder Aviso</h2>
+        <button onClick={() => setVisivel(!visivel)}>
+          Alternar aviso
         </button>
+
+
+        {visivel && <p style={{ color: "blue" }}>O aviso está visível.</p>}
       </section>
 
-      <div className="ticks"></div>
 
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
+      <section style={{ marginBottom: "30px" }}>
+        <h2>Desafio Final — Cartão de Boas-Vindas</h2>
+        
+        <div style={{ display: "flex", flexDirection: "column", gap: "10px", maxWidth: "300px" }}>
+          <input
+            type="text"
+            value={nome}
+            onChange={(evento) => setNome(evento.target.value)}
+            placeholder="Digite seu nome"
+            style={{ padding: "8px" }}
+          />
+
+          <button onClick={() => setMostrarSaudacao(!mostrarSaudacao)}>
+            {mostrarSaudacao ? "Esconder Saudação" : "Mostrar Saudação"}
+          </button>
         </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
+
+
+        {mostrarSaudacao && (
+          <p style={{ marginTop: "15px", fontSize: "1.2rem" }}>
+            Olá, <strong>{nome || "visitante"}</strong>!
+          </p>
+        )}
       </section>
-
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-    </>
-  )
+    </div>
+  );
 }
-
-export default App
