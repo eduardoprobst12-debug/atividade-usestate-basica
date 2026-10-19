@@ -1,76 +1,82 @@
 import { useState } from "react";
 
 export default function App() {
-
+  // ==========================================
+  // MISSÃO 1: Contador
+  // ==========================================
   const [contador, setContador] = useState(0);
 
-
   function aumentar() {
-    setContador((valorAnterior) => {
-      if (valorAnterior >= 10) return valorAnterior; 
-      return valorAnterior + 1;
-    });
+    setContador((valorAnterior) => valorAnterior + 1);
   }
-
 
   function diminuir() {
     setContador((valorAnterior) => valorAnterior - 1);
   }
 
-
-  function resetar() {
-    setContador(0);
-  }
-
-
+  // ==========================================
+  // MISSÃO 2: Mostrar e esconder um aviso
+  // ==========================================
   const [visivel, setVisivel] = useState(false);
 
-
+  // ==========================================
+  // MISSÃO 3 & DESAFIO FINAL: Saudação e Cartão de Boas-Vindas
+  // ==========================================
   const [nome, setNome] = useState("");
   const [mostrarSaudacao, setMostrarSaudacao] = useState(true);
 
   return (
-    <div style={{ padding: "20px", fontFamily: "sans-serif", maxWidth: "500px" }}>
-      <h1>Exercícios de React useState</h1>
+    <div style={{ padding: "20px", fontFamily: "sans-serif" }}>
+      <h1>Exercícios de React - useState</h1>
 
 
-      <section style={{ marginBottom: "30px", borderBottom: "1px solid #ccc", pb: "10px" }}>
-        <h2>Missão 1 + Desafio Extra — Contador</h2>
-        <p>Valor atual: <strong>{contador}</strong></p>
-
-        {contador === 10 && (
-          <p style={{ color: "green", fontWeight: "bold" }}>🎉 Meta atingida (10)!</p>
-        )}
-
-        <div style={{ display: "flex", gap: "10px" }}>
-          <button onClick={aumentar}>Aumentar</button>
-          <button onClick={diminuir}>Voltar um</button>
-          <button onClick={resetar}>Zerar</button>
-        </div>
+      <section style={{ marginBottom: "20px" }}>
+        <h2>Missão 1 — Contador</h2>
+        <p>Valor atual: {contador}</p>
+        <button onClick={aumentar} style={{ marginRight: "10px" }}>
+          Aumentar
+        </button>
+        <button onClick={diminuir}>
+          Voltar um
+        </button>
       </section>
 
+      <hr />
 
-      <section style={{ marginBottom: "30px", borderBottom: "1px solid #ccc", pb: "10px" }}>
-        <h2>Missão 2 — Mostrar e Esconder Aviso</h2>
+
+      <section style={{ marginBottom: "20px" }}>
+        <h2>Missão 2 — Mostrar e esconder um aviso</h2>
         <button onClick={() => setVisivel(!visivel)}>
           Alternar aviso
         </button>
-
-
-        {visivel && <p style={{ color: "blue" }}>O aviso está visível.</p>}
+        {visivel && <p>O aviso está visível.</p>}
       </section>
 
+      <hr />
 
-      <section style={{ marginBottom: "30px" }}>
-        <h2>Desafio Final — Cartão de Boas-Vindas</h2>
-        
-        <div style={{ display: "flex", flexDirection: "column", gap: "10px", maxWidth: "300px" }}>
+
+      <section style={{ marginBottom: "20px" }}>
+        <h2>Missão 3 — Saudação com campo de texto</h2>
+        <input
+          type="text"
+          value={nome}
+          onChange={(evento) => setNome(evento.target.value)}
+          placeholder="Digite seu nome"
+        />
+        <p>Olá, {nome || "visitante"}!</p>
+      </section>
+
+      <hr />
+
+
+      <section style={{ marginBottom: "20px" }}>
+        <h2>Desafio Final — Cartão de boas-vindas</h2>
+        <div style={{ display: "flex", flexDirection: "column", gap: "10px", maxWidth: "250px" }}>
           <input
             type="text"
             value={nome}
             onChange={(evento) => setNome(evento.target.value)}
             placeholder="Digite seu nome"
-            style={{ padding: "8px" }}
           />
 
           <button onClick={() => setMostrarSaudacao(!mostrarSaudacao)}>
@@ -78,10 +84,9 @@ export default function App() {
           </button>
         </div>
 
-
         {mostrarSaudacao && (
-          <p style={{ marginTop: "15px", fontSize: "1.2rem" }}>
-            Olá, <strong>{nome || "visitante"}</strong>!
+          <p>
+            Olá, {nome || "visitante"}!
           </p>
         )}
       </section>
