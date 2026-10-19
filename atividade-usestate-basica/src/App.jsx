@@ -43,7 +43,7 @@ export default function App() {
         <button onClick={() => setVisivel(!visivel)}>
           Alternar aviso
         </button>
-        {visivel && <p>O aviso está visível.</p>}
+        {visivel && <p>O aviso está visível</p>}
       </section>
 
       <hr />
