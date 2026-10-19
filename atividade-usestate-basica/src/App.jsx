@@ -1,9 +1,7 @@
 import { useState } from "react";
 
 export default function App() {
-  // ==========================================
-  // MISSÃO 1: Contador
-  // ==========================================
+
   const [contador, setContador] = useState(0);
 
   function aumentar() {
@@ -14,14 +12,10 @@ export default function App() {
     setContador((valorAnterior) => valorAnterior - 1);
   }
 
-  // ==========================================
-  // MISSÃO 2: Mostrar e esconder um aviso
-  // ==========================================
+
   const [visivel, setVisivel] = useState(false);
 
-  // ==========================================
-  // MISSÃO 3 & DESAFIO FINAL: Saudação e Cartão de Boas-Vindas
-  // ==========================================
+
   const [nome, setNome] = useState("");
   const [mostrarSaudacao, setMostrarSaudacao] = useState(true);
 
